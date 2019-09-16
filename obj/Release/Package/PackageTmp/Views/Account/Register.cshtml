@@ -1,0 +1,89 @@
+﻿@model CashPortal.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<head>
+    <style>
+        input {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "Multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                                <form class="user">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control input" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control input" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.DisplayName, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control input" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control input" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.AvatarUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <input name="Avatar" type="file" />
+                                            @Html.ValidationMessageFor(m => m.AvatarUrl, "", new { @class = "text-danger input" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control input" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control input" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <div class="text-left">
+                                                <input type="submit" class="btn btn-primary" value="Register" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="text-center">
+                                    <a class="small" href="">@Html.ActionLink("Forgot Password?", "ForgotPassword", "Account")</a>
+                                </div>
+                                <div class="text-center">
+                                    <a class="small" href="">@Html.ActionLink("Already have an account? Login.", "Login", "Account")</a>
+                                </div>
+                            </div>
+        }
+    </div>
+</body>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
